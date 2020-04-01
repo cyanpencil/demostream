@@ -8,7 +8,7 @@ Streaming service for great demoscene examples (c64, amiga, zx spectrum, etc)
 # Instructions
 - Put your demos in the `video/<category>/` folder. Accepted formats are `mp4`, `webm` and `mkv` (e.g. if you have a c64 demo, put it in `video/c64/example.mp4`). Your demos will be played at random to the nginx server which will serve them through `hls` (http live streaming) on port 8080.
 
-- (optional) change `demostream.m3u8` to point to the url where you will be serving the stream (only necessary to play the x264 feed through custom players such as mpv)
+- (optional) change `demostream.m3u8` to point to the url where you will be serving the stream (only necessary to play the stream through custom players such as mpv)
 
 - Change `run.sh` if you use `docker` instead of `podman`
 

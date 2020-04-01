@@ -66,11 +66,23 @@ a {
 	color: #bb93b2;
 }
 
+.github {
+	position:relative;
+	width:100%;
+	max-width:100%;
+	text-align: right;
+	font-size: 70%;
+	color: white;
+}
+
 
 </style>
 <script src="https://hls-js.netlify.com/dist/hls.js"></script>
 </head>
 <body>
+
+
+
 <center>
 	<h1>cyan's stream</h1>
 </center>
@@ -87,7 +99,7 @@ Play it in background to have a stimulating visual and audio effect to improve w
 		if(Hls.isSupported()) {
 			var video = document.getElementById('video');
 			var hls = new Hls();
-			hls.loadSource('http://cyanpencil.xyz:8080/media_server/test/index.m3u8');
+			hls.loadSource('http://cyanpencil.xyz:8080/media_server/demostream/index.m3u8');
 			hls.attachMedia(video);
 			hls.on(Hls.Events.MANIFEST_PARSED,function() {
 				video.play();
@@ -95,7 +107,7 @@ Play it in background to have a stimulating visual and audio effect to improve w
 		}
 
 	else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-	video.src = 'http://cyanpencil.xyz:8080/media_server/test/index.m3u8';
+	video.src = 'http://cyanpencil.xyz:8080/media_server/demostream/index.m3u8';
 	video.addEventListener('canplay',function() {
 	video.play();
 	});
@@ -105,6 +117,11 @@ Play it in background to have a stimulating visual and audio effect to improve w
 	<br/>
 	<a href="http://demostream.cyanpencil.xyz/stat">some stats</a> -
 	<a href="http://demostream.cyanpencil.xyz/demostream.m3u8">x264 feed</a> (open with mpv or vlc)  
+	- [<?php
+	echo shell_exec("ss -t state established sport 8080 | wc -l");
+	?>
+	viewers]
+
 </center>
 
 <p>
@@ -134,6 +151,9 @@ Want to know some more? Here are a few great links to delve into: <br/>
 
 
 
+
 </p>
+
+<div class="github" > <a href="https://github.com/cyanpencil/demostream"> source on github </a> </div>
 
 </html>

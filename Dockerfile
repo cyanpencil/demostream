@@ -6,7 +6,7 @@ ENV NGINX_RTMP_MODULE_VERSION 1.2.1
 
 # Install dependencies
 RUN pacman -Sy && \
-    pacman -S wget tar base-devel ffmpeg libva-intel-driver --noconfirm
+    pacman -S wget tar base-devel ffmpeg libva-intel-driver php-fpm iproute2 --noconfirm
 
 
 # Download and decompress Nginx
@@ -45,8 +45,7 @@ RUN cd /tmp/build/nginx/${NGINX_VERSION} && \
     rm -rf /tmp/build
 
 # Forward logs to Docker
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
 
 EXPOSE 1935
 RUN mkdir -p /home/user/tmp/media_server && \
@@ -54,7 +53,7 @@ RUN mkdir -p /home/user/tmp/media_server && \
 
 # Set up config file
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY index.html demostream.m3u8 ffmpeg_stream.sh /home/user
+COPY index.php demostream.m3u8 ffmpeg_stream.sh /home/user
 COPY fonts /home/user/fonts
 
 CMD ["/bin/bash", "/home/user/ffmpeg_stream.sh"]
